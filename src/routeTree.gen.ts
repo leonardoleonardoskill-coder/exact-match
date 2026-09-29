@@ -10,11 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ImoveisIndexRouteImport } from './routes/imoveis.index'
+import { Route as ViaturasIndexRouteImport } from './routes/viaturas.index'
 import { Route as ApiPublicFotoSplatRouteImport } from './routes/api/public/foto/$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImoveisIndexRoute = ImoveisIndexRouteImport.update({
+  id: '/imoveis/',
+  path: '/imoveis/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ViaturasIndexRoute = ViaturasIndexRouteImport.update({
+  id: '/viaturas/',
+  path: '/viaturas/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicFotoSplatRoute = ApiPublicFotoSplatRouteImport.update({
@@ -25,27 +37,35 @@ const ApiPublicFotoSplatRoute = ApiPublicFotoSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/imoveis/': typeof ImoveisIndexRoute
+  '/viaturas/': typeof ViaturasIndexRoute
   '/api/public/foto/$': typeof ApiPublicFotoSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/imoveis': typeof ImoveisIndexRoute
+  '/viaturas': typeof ViaturasIndexRoute
   '/api/public/foto/$': typeof ApiPublicFotoSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/imoveis/': typeof ImoveisIndexRoute
+  '/viaturas/': typeof ViaturasIndexRoute
   '/api/public/foto/$': typeof ApiPublicFotoSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/api/public/foto/$'
+  fullPaths: '/' | '/imoveis/' | '/viaturas/' | '/api/public/foto/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/api/public/foto/$'
-  id: '__root__' | '/' | '/api/public/foto/$'
+  to: '/' | '/imoveis' | '/viaturas' | '/api/public/foto/$'
+  id: '__root__' | '/' | '/imoveis/' | '/viaturas/' | '/api/public/foto/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ImoveisIndexRoute: typeof ImoveisIndexRoute
+  ViaturasIndexRoute: typeof ViaturasIndexRoute
   ApiPublicFotoSplatRoute: typeof ApiPublicFotoSplatRoute
 }
 
@@ -56,6 +76,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/imoveis/': {
+      id: '/imoveis/'
+      path: '/imoveis'
+      fullPath: '/imoveis/'
+      preLoaderRoute: typeof ImoveisIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/viaturas/': {
+      id: '/viaturas/'
+      path: '/viaturas'
+      fullPath: '/viaturas/'
+      preLoaderRoute: typeof ViaturasIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/foto/$': {
@@ -70,6 +104,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ImoveisIndexRoute: ImoveisIndexRoute,
+  ViaturasIndexRoute: ViaturasIndexRoute,
   ApiPublicFotoSplatRoute: ApiPublicFotoSplatRoute,
 }
 export const routeTree = rootRouteImport
