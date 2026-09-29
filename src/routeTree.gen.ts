@@ -10,8 +10,13 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ConsultorRouteImport } from './routes/consultor'
+import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as ImoveisIndexRouteImport } from './routes/imoveis.index'
+import { Route as ImoveisSlugRouteImport } from './routes/imoveis.$slug'
 import { Route as ViaturasIndexRouteImport } from './routes/viaturas.index'
+import { Route as ViaturasSlugRouteImport } from './routes/viaturas.$slug'
 import { Route as ApiPublicFotoSplatRouteImport } from './routes/api/public/foto/$'
 
 const IndexRoute = IndexRouteImport.update({
@@ -19,14 +24,39 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConsultorRoute = ConsultorRouteImport.update({
+  id: '/consultor',
+  path: '/consultor',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactoRoute = ContactoRouteImport.update({
+  id: '/contacto',
+  path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ImoveisIndexRoute = ImoveisIndexRouteImport.update({
   id: '/imoveis/',
   path: '/imoveis/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ImoveisSlugRoute = ImoveisSlugRouteImport.update({
+  id: '/imoveis/$slug',
+  path: '/imoveis/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ViaturasIndexRoute = ViaturasIndexRouteImport.update({
   id: '/viaturas/',
   path: '/viaturas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ViaturasSlugRoute = ViaturasSlugRouteImport.update({
+  id: '/viaturas/$slug',
+  path: '/viaturas/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicFotoSplatRoute = ApiPublicFotoSplatRouteImport.update({
@@ -37,12 +67,22 @@ const ApiPublicFotoSplatRoute = ApiPublicFotoSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/consultor': typeof ConsultorRoute
+  '/contacto': typeof ContactoRoute
+  '/sobre': typeof SobreRoute
+  '/imoveis/$slug': typeof ImoveisSlugRoute
+  '/viaturas/$slug': typeof ViaturasSlugRoute
   '/imoveis/': typeof ImoveisIndexRoute
   '/viaturas/': typeof ViaturasIndexRoute
   '/api/public/foto/$': typeof ApiPublicFotoSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/consultor': typeof ConsultorRoute
+  '/contacto': typeof ContactoRoute
+  '/sobre': typeof SobreRoute
+  '/imoveis/$slug': typeof ImoveisSlugRoute
+  '/viaturas/$slug': typeof ViaturasSlugRoute
   '/imoveis': typeof ImoveisIndexRoute
   '/viaturas': typeof ViaturasIndexRoute
   '/api/public/foto/$': typeof ApiPublicFotoSplatRoute
@@ -50,20 +90,58 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/consultor': typeof ConsultorRoute
+  '/contacto': typeof ContactoRoute
+  '/sobre': typeof SobreRoute
+  '/imoveis/$slug': typeof ImoveisSlugRoute
+  '/viaturas/$slug': typeof ViaturasSlugRoute
   '/imoveis/': typeof ImoveisIndexRoute
   '/viaturas/': typeof ViaturasIndexRoute
   '/api/public/foto/$': typeof ApiPublicFotoSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/imoveis/' | '/viaturas/' | '/api/public/foto/$'
+  fullPaths:
+    | '/'
+    | '/consultor'
+    | '/contacto'
+    | '/sobre'
+    | '/imoveis/$slug'
+    | '/viaturas/$slug'
+    | '/imoveis/'
+    | '/viaturas/'
+    | '/api/public/foto/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/imoveis' | '/viaturas' | '/api/public/foto/$'
-  id: '__root__' | '/' | '/imoveis/' | '/viaturas/' | '/api/public/foto/$'
+  to:
+    | '/'
+    | '/consultor'
+    | '/contacto'
+    | '/sobre'
+    | '/imoveis/$slug'
+    | '/viaturas/$slug'
+    | '/imoveis'
+    | '/viaturas'
+    | '/api/public/foto/$'
+  id:
+    | '__root__'
+    | '/'
+    | '/consultor'
+    | '/contacto'
+    | '/sobre'
+    | '/imoveis/$slug'
+    | '/viaturas/$slug'
+    | '/imoveis/'
+    | '/viaturas/'
+    | '/api/public/foto/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ConsultorRoute: typeof ConsultorRoute
+  ContactoRoute: typeof ContactoRoute
+  SobreRoute: typeof SobreRoute
+  ImoveisSlugRoute: typeof ImoveisSlugRoute
+  ViaturasSlugRoute: typeof ViaturasSlugRoute
   ImoveisIndexRoute: typeof ImoveisIndexRoute
   ViaturasIndexRoute: typeof ViaturasIndexRoute
   ApiPublicFotoSplatRoute: typeof ApiPublicFotoSplatRoute
@@ -78,6 +156,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/consultor': {
+      id: '/consultor'
+      path: '/consultor'
+      fullPath: '/consultor'
+      preLoaderRoute: typeof ConsultorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contacto': {
+      id: '/contacto'
+      path: '/contacto'
+      fullPath: '/contacto'
+      preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/imoveis/': {
       id: '/imoveis/'
       path: '/imoveis'
@@ -85,11 +184,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImoveisIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/imoveis/$slug': {
+      id: '/imoveis/$slug'
+      path: '/imoveis/$slug'
+      fullPath: '/imoveis/$slug'
+      preLoaderRoute: typeof ImoveisSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/viaturas/': {
       id: '/viaturas/'
       path: '/viaturas'
       fullPath: '/viaturas/'
       preLoaderRoute: typeof ViaturasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/viaturas/$slug': {
+      id: '/viaturas/$slug'
+      path: '/viaturas/$slug'
+      fullPath: '/viaturas/$slug'
+      preLoaderRoute: typeof ViaturasSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/foto/$': {
@@ -104,6 +217,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ConsultorRoute: ConsultorRoute,
+  ContactoRoute: ContactoRoute,
+  SobreRoute: SobreRoute,
+  ImoveisSlugRoute: ImoveisSlugRoute,
+  ViaturasSlugRoute: ViaturasSlugRoute,
   ImoveisIndexRoute: ImoveisIndexRoute,
   ViaturasIndexRoute: ViaturasIndexRoute,
   ApiPublicFotoSplatRoute: ApiPublicFotoSplatRoute,
